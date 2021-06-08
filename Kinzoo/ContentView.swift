@@ -13,9 +13,18 @@ struct ContentView: View {
             HeaderView()
             AddButtonView()
             VStack(alignment: .center, spacing: 16) {
-                FriendBubbleView()
+                FriendBubbleView(friend: "marco", size: 130, borderColor: Color(red: 97/255, green: 65/255, blue: 217/255))
                 Text("Marco")
-                    .font(.system(size: 16, weight: .semibold, design: .default))
+                    .font(.system(size: 16, weight: .bold, design: .default))
+            }
+            
+            VStack(alignment: .leading) {
+                FriendBubbleView(friend: "clem", size: 70, borderColor: Color.clear)
+                FriendBubbleView(friend: "charles", size: 70, borderColor: Color.white)
+                    .offset(x:40 ,y: -25)
+                Text("Clem & Charles")
+                    .font(.system(size: 16, weight: .bold, design: .default))
+                    .offset(y: -16)
             }
             Spacer()
         }
@@ -74,11 +83,15 @@ struct AddButtonView: View {
 }
 
 struct FriendBubbleView: View {
+    var friend: String
+    var size: CGFloat
+    var borderColor: Color
+    
     var body: some View {
-        Image("marco")
+        Image(friend)
             .resizable()
-            .frame(width: 150, height: 150)
-            .cornerRadius(75)
-            .overlay(Circle().stroke(Color(red: 97/255, green: 65/255, blue: 217/255), lineWidth: 7))
+            .frame(width: size, height: size)
+            .cornerRadius(size/2)
+            .overlay(Circle().stroke(borderColor, lineWidth: 7))
     }
 }
