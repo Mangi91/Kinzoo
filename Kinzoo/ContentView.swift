@@ -11,6 +11,12 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HeaderView()
+            AddButtonView()
+            VStack(alignment: .center, spacing: 16) {
+                FriendBubbleView()
+                Text("Marco")
+                    .font(.system(size: 16, weight: .semibold, design: .default))
+            }
             Spacer()
         }
     }
@@ -46,5 +52,33 @@ struct HeaderView: View {
                 .foregroundColor(Color(red: 97/255, green: 65/255, blue: 217/255))
         }
         .padding(.horizontal, 16)
+    }
+}
+
+struct AddButtonView: View {
+    var body: some View {
+        VStack {
+            Image("add")
+                .renderingMode(.template)
+                .resizable()
+                .frame(width: 30, height: 30)
+                .foregroundColor(.white)
+                .padding(.all, 20.0)
+                .background(Color(red: 97/255, green: 65/255, blue: 217/255))
+                .cornerRadius(35)
+            Text("Add")
+                .font(.system(size: 16, weight: .semibold, design: .default))
+                .foregroundColor(Color(red: 97/255, green: 65/255, blue: 217/255))
+        }
+    }
+}
+
+struct FriendBubbleView: View {
+    var body: some View {
+        Image("marco")
+            .resizable()
+            .frame(width: 150, height: 150)
+            .cornerRadius(75)
+            .overlay(Circle().stroke(Color(red: 97/255, green: 65/255, blue: 217/255), lineWidth: 7))
     }
 }
