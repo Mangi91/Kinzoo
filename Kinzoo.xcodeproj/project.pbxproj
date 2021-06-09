@@ -11,6 +11,7 @@
 		0D38049F266DA3ED00763E89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D38049E266DA3ED00763E89 /* ContentView.swift */; };
 		0D3804A1266DA3EE00763E89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D3804A0266DA3EE00763E89 /* Assets.xcassets */; };
 		0D3804A4266DA3EE00763E89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D3804A3266DA3EE00763E89 /* Preview Assets.xcassets */; };
+		0D74A2A426704B0F0060723F /* Strings+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D74A2A326704B0F0060723F /* Strings+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		0D3804A0266DA3EE00763E89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D3804A3266DA3EE00763E89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0D3804A5266DA3EE00763E89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D74A2A326704B0F0060723F /* Strings+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		0D38049B266DA3ED00763E89 /* Kinzoo */ = {
 			isa = PBXGroup;
 			children = (
+				0D74A2A226704AEC0060723F /* Extensions */,
 				0D38049C266DA3ED00763E89 /* KinzooApp.swift */,
 				0D38049E266DA3ED00763E89 /* ContentView.swift */,
 				0D3804A0266DA3EE00763E89 /* Assets.xcassets */,
@@ -67,6 +70,14 @@
 				0D3804A3266DA3EE00763E89 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0D74A2A226704AEC0060723F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0D74A2A326704B0F0060723F /* Strings+Helpers.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 			files = (
 				0D38049F266DA3ED00763E89 /* ContentView.swift in Sources */,
 				0D38049D266DA3ED00763E89 /* KinzooApp.swift in Sources */,
+				0D74A2A426704B0F0060723F /* Strings+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
