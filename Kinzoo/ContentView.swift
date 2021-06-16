@@ -10,11 +10,19 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            HeaderView()
-            AddButtonView()
-            UnoGroupView(friend: "marco")
-            DuoGroupView(friend1: "clem", friend2: "charles")
-            Spacer()
+            Header()
+            ScrollView {
+                LazyVGrid(columns: [.init(), .init()]) {
+                    AddButton()
+                    TrioGroup(friends: ["ahmed", "brad", "walter"], color: .kinzooPurple)
+                        .frame(height:265)
+                    UnoGroup(friend: "marco", color: .kinzooPurple)
+                    UnoGroup(friend: "kevin", color: .clear)
+                    DuoGroup(friends: ["clem", "charles"])
+                    TrioGroup(friends: ["john", "natalia", "michelle"], color: .white)
+                }
+                .padding(.top)
+            }
         }
     }
 }
@@ -25,9 +33,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct HeaderView: View {
-    private let purple: Color = Color(red: 97/255, green: 65/255, blue: 217/255)
-    
+struct Header: View {
     var body: some View {
         HStack {
             HStack {
@@ -48,15 +54,13 @@ struct HeaderView: View {
                 .renderingMode(.template)
                 .resizable()
                 .frame(width: 25, height: 25)
-                .foregroundColor(purple)
+                .foregroundColor(.kinzooPurple)
         }
         .padding(.horizontal, 16)
     }
 }
 
-struct AddButtonView: View {
-    private let purple: Color = Color(red: 97/255, green: 65/255, blue: 217/255)
-    
+struct AddButton: View {
     var body: some View {
         VStack {
             Image("add")
@@ -65,11 +69,11 @@ struct AddButtonView: View {
                 .frame(width: 30, height: 30)
                 .foregroundColor(.white)
                 .padding(.all, 20.0)
-                .background(purple)
+                .background(Color.kinzooPurple)
                 .cornerRadius(35)
             Text("Add")
                 .font(.system(size: 16, weight: .semibold, design: .default))
-                .foregroundColor(purple)
+                .foregroundColor(.kinzooPurple)
         }
     }
 }
@@ -89,8 +93,8 @@ struct FriendBubbleView: View {
 }
 
 struct ColorBubbleView: View {
-    var color: Color;
-    var size: CGFloat;
+    var color: Color
+    var size: CGFloat
     
     var body: some View {
         Rectangle()
@@ -100,49 +104,71 @@ struct ColorBubbleView: View {
     }
 }
 
-struct UnoGroupView: View {
+struct UnoGroup: View {
     public var friend: String
-    
-    private let purple: Color = Color(red: 97/255, green: 65/255, blue: 217/255)
+    public var color: Color
     
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
-            FriendBubbleView(friend: friend, size: 130, borderColor: purple)
+            FriendBubbleView(friend: friend, size: 130, borderColor: color)
             Text(friend.capitilizeFirst())
                 .font(.system(size: 16, weight: .bold, design: .default))
         }
     }
 }
 
-struct DuoGroupView: View {
-    public var friend1: String
-    public var friend2: String
-    
-    private let pink: Color = Color(red: 246/255, green: 90/255, blue: 186/255)
-    private let orange: Color = Color(red: 251/255, green: 122/255, blue: 85/255)
-    private let yellow: Color = Color(red: 254/255, green: 215/255, blue: 96/255)
-    private let blue: Color = Color(red: 68/255, green: 207/255, blue: 156/255)
+struct DuoGroup: View {
+    public var friends: [String]
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            FriendBubbleView(friend: friends[0], size: 70, borderColor: Color.clear)
+            FriendBubbleView(friend: friends[1], size: 70, borderColor: Color.white)
+                .offset(x:40 ,y: 50)
+            ColorBubbleView(color: .kinzooPink, size: 17)
+                .offset(x: 25, y: 75)
+            ColorBubbleView(color: .kinzooOrange, size: 7)
+                .offset(x: 10, y: 80)
+            ColorBubbleView(color: .kinzooYellow, size: 10)
+                .offset(x: 12, y: 45)
+            ColorBubbleView(color: .kinzooBlue, size: 12)
+                .offset(x: 80, y: 5)
+            ColorBubbleView(color: .kinzooYellow, size: 15)
+                .offset(x: 90, y: -22)
+            ColorBubbleView(color: .kinzooOrange, size: 10)
+                .offset(x: 110, y: 7)
+            Text("\(friends[0].capitilizeFirst()) & \(friends[1].capitilizeFirst())")
+                .font(.system(size: 16, weight: .bold, design: .default))
+                .offset(y: 115)
+        }
+    }
+}
+
+struct TrioGroup: View {
+    public var friends: [String]
+    public var color: Color
     
     var body: some View {
-        VStack(alignment: .leading) {
-            FriendBubbleView(friend: friend1, size: 70, borderColor: Color.clear)
-            FriendBubbleView(friend: friend2, size: 70, borderColor: Color.white)
-                .offset(x:40 ,y: -25)
-            ColorBubbleView(color: pink, size: 18)
-                .offset(x: 25, y: -55)
-            ColorBubbleView(color: orange, size: 8)
-                .offset(x: 10, y: -70)
-            ColorBubbleView(color: yellow, size: 10)
-                .offset(x: 12, y: -120)
-            ColorBubbleView(color: blue, size: 12)
-                .offset(x: 80, y: -180)
-            ColorBubbleView(color: yellow, size: 15)
-                .offset(x: 90, y: -230)
-            ColorBubbleView(color: orange, size: 10)
-                .offset(x: 110, y: -220)
-            Text("\(friend1.capitilizeFirst()) & \(friend2.capitilizeFirst())")
+        ZStack(alignment: .leading) {
+            FriendBubbleView(friend: friends[0], size: 70, borderColor: color)
+                .offset(x:0, y:0)
+            FriendBubbleView(friend: friends[1], size: 70, borderColor: color)
+               .offset(x:55, y:0)
+            FriendBubbleView(friend: friends[2], size: 70, borderColor: color)
+               .offset(x:25, y:47)
+            ColorBubbleView(color: .kinzooPink, size: 17)
+                .offset(x: 2, y: 70)
+            ColorBubbleView(color: .kinzooOrange, size: 7)
+                .offset(x: 5, y: 40)
+            ColorBubbleView(color: .kinzooBlue, size: 12)
+                .offset(x: 110, y: 55)
+            ColorBubbleView(color: .kinzooOrange, size: 10)
+                .offset(x: 100, y: 70)
+            Text("\(friends[0].capitilizeFirst()), \(friends[1].capitilizeFirst()) &\n \(friends[2].capitilizeFirst())")
                 .font(.system(size: 16, weight: .bold, design: .default))
-                .offset(y: -125)
+                .fixedSize(horizontal: false, vertical:true)
+                .multilineTextAlignment(.center)
+                .offset(y: 115)
         }
     }
 }
