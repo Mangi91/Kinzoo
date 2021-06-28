@@ -14,25 +14,54 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Header(user: "mike")
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(), GridItem()]) {
-                        AddButton()
-                            .padding(.bottom, 50)
-                        TrioGroup(friends: ["ahmed", "brad", "walter"], color: .kinzooPurple)
-                        UnoGroup(friend: "marco", color: .kinzooPurple)
-                            .padding(.bottom, 240)
-                        UnoGroup(friend: "kevin", color: .clear)
-                        DuoGroup(friends: ["clem", "charles"])
-                            .padding(.top, -200)
-                        TrioGroup(friends: ["john", "natalia", "michelle"], color: .white)
-                            .padding(.top, -50)
+                ScrollView(showsIndicators: false) {
+                    HStack(alignment: VerticalAlignment.CustAlignment, spacing: 45) {
+                        VStack(spacing: 40) {
+                            AddButton()
+                                .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
+                                    dimension[.bottom]
+                                })
+                            UnoGroup(friend: "marco", color: .kinzooPurple)
+                                .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
+                                    dimension[.bottom]
+                                })
+                            DuoGroup(friends: ["clem", "charles"])
+                                .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
+                                    dimension[.bottom]
+                                })
+                        }
+                        VStack(spacing: 40) {
+                            TrioGroup(friends: ["ahmed", "brad", "walter"], color: .kinzooPurple)
+                                .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
+                                    dimension[VerticalAlignment.CustAlignment]
+                                })
+                            UnoGroup(friend: "kevin", color: .clear)
+                                .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
+                                    dimension[.top]
+                                })
+                            TrioGroup(friends: ["john", "natalia", "michelle"], color: .white)
+                                .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
+                                    dimension[.top]
+                                })
+                        }
                     }
-                    .padding(.top)
+                    .padding()
                 }
             }
         }
     }
 }
+
+extension VerticalAlignment {
+    enum CustomAlignment: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            return context[VerticalAlignment.center]
+        }
+    }
+    
+    static let CustAlignment = Self(CustomAlignment.self)
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -173,6 +202,7 @@ struct DuoGroup: View {
                 .font(.system(size: 16, weight: .bold, design: .default))
                 .offset(y: 115)
         }
+        .padding(.bottom, 90)
     }
 }
 
@@ -214,5 +244,6 @@ struct TrioGroup: View {
                 .multilineTextAlignment(.center)
                 .offset(y: 115)
         }
+        .padding(.bottom, 100)
     }
 }
