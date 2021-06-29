@@ -8,45 +8,68 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var initialLoad = true
+    let animationDuration = 1.0
+    
     var body: some View {
         ZStack {
             Color.white
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Header(user: "mike")
+                    .opacity(initialLoad ? 0 : 1)
+                    .offset(y: initialLoad ? -10 : 0)
+                    .animation(.easeInOut(duration: 0.7))
                 ScrollView(showsIndicators: false) {
                     HStack(alignment: VerticalAlignment.CustAlignment, spacing: 45) {
                         VStack(spacing: 40) {
                             AddButton()
+                                .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[.bottom]
                                 })
+                                .animation(.easeInOut(duration: animationDuration).delay(0.1))
                             UnoGroup(friend: "marco", color: .kinzooPurple)
+                                .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[.bottom]
                                 })
+                                .animation(.easeInOut(duration: animationDuration).delay(0.3))
                             DuoGroup(friends: ["clem", "charles"])
+                                .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[.bottom]
                                 })
+                                .animation(.easeInOut(duration: animationDuration).delay(0.5))
                         }
                         VStack(spacing: 40) {
                             TrioGroup(friends: ["ahmed", "brad", "walter"], color: .kinzooPurple)
+                                .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[VerticalAlignment.CustAlignment]
                                 })
+                                .animation(.easeInOut(duration: animationDuration).delay(0.2))
                             UnoGroup(friend: "kevin", color: .clear)
+                                .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[.top]
                                 })
+                                .animation(.easeInOut(duration: animationDuration).delay(0.4))
                             TrioGroup(friends: ["john", "natalia", "michelle"], color: .white)
+                                .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[.top]
                                 })
+                                .animation(.easeInOut(duration: animationDuration).delay(0.6))
                         }
                     }
                     .padding()
                 }
+            }
+        }
+        .onAppear() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+                initialLoad = false
             }
         }
     }
