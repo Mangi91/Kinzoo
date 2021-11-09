@@ -11,6 +11,7 @@
 		0D38049F266DA3ED00763E89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D38049E266DA3ED00763E89 /* ContentView.swift */; };
 		0D3804A1266DA3EE00763E89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D3804A0266DA3EE00763E89 /* Assets.xcassets */; };
 		0D3804A4266DA3EE00763E89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D3804A3266DA3EE00763E89 /* Preview Assets.xcassets */; };
+		0D6B7894273A016600D640C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B7893273A016600D640C5 /* README.md */; };
 		0D71D1322672F7EE0076C559 /* Colors+Kinzoo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D71D1312672F7EE0076C559 /* Colors+Kinzoo.swift */; };
 		0D74A2A426704B0F0060723F /* Strings+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D74A2A326704B0F0060723F /* Strings+Helpers.swift */; };
 /* End PBXBuildFile section */
@@ -22,6 +23,7 @@
 		0D3804A0266DA3EE00763E89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D3804A3266DA3EE00763E89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0D3804A5266DA3EE00763E89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D6B7893273A016600D640C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0D71D1312672F7EE0076C559 /* Colors+Kinzoo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Kinzoo.swift"; sourceTree = "<group>"; };
 		0D74A2A326704B0F0060723F /* Strings+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +64,7 @@
 				0D3804A0266DA3EE00763E89 /* Assets.xcassets */,
 				0D3804A5266DA3EE00763E89 /* Info.plist */,
 				0D3804A2266DA3EE00763E89 /* Preview Content */,
+				0D6B7893273A016600D640C5 /* README.md */,
 			);
 			path = Kinzoo;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D6B7894273A016600D640C5 /* README.md in Resources */,
 				0D3804A4266DA3EE00763E89 /* Preview Assets.xcassets in Resources */,
 				0D3804A1266DA3EE00763E89 /* Assets.xcassets in Resources */,
 			);
