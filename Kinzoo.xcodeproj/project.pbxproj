@@ -42,6 +42,7 @@
 		0D380490266DA3ED00763E89 = {
 			isa = PBXGroup;
 			children = (
+				0D6B7893273A016600D640C5 /* README.md */,
 				0D38049B266DA3ED00763E89 /* Kinzoo */,
 				0D38049A266DA3ED00763E89 /* Products */,
 			);
@@ -64,7 +65,6 @@
 				0D3804A0266DA3EE00763E89 /* Assets.xcassets */,
 				0D3804A5266DA3EE00763E89 /* Info.plist */,
 				0D3804A2266DA3EE00763E89 /* Preview Content */,
-				0D6B7893273A016600D640C5 /* README.md */,
 			);
 			path = Kinzoo;
 			sourceTree = "<group>";
