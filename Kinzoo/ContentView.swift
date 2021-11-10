@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var initialLoad = true
+    @State private var bubbleInitialLoad = true
     let animationDuration = 1.0
     
     var body: some View {
@@ -35,7 +36,7 @@ struct ContentView: View {
                                     dimension[.bottom]
                                 })
                                 .animation(.easeInOut(duration: animationDuration).delay(0.3))
-                            DuoGroup(friends: ["clem", "charles"])
+                            DuoGroup(friends: ["clem", "charles"], onLoad: self.$bubbleInitialLoad)
                                 .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[.bottom]
@@ -43,7 +44,7 @@ struct ContentView: View {
                                 .animation(.easeInOut(duration: animationDuration).delay(0.5))
                         }
                         VStack(spacing: 40) {
-                            TrioGroup(friends: ["ahmed", "brad", "walter"], color: .kinzooPurple)
+                            TrioGroup(friends: ["ahmed", "brad", "walter"], color: .kinzooPurple, onLoad: self.$bubbleInitialLoad)
                                 .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[VerticalAlignment.CustAlignment]
@@ -55,7 +56,7 @@ struct ContentView: View {
                                     dimension[.top]
                                 })
                                 .animation(.easeInOut(duration: animationDuration).delay(0.4))
-                            TrioGroup(friends: ["john", "natalia", "michelle"], color: .white)
+                            TrioGroup(friends: ["john", "natalia", "michelle"], color: .white, onLoad: self.$bubbleInitialLoad)
                                 .offset(y: initialLoad ? 1000 : 0)
                                 .alignmentGuide(VerticalAlignment.CustAlignment, computeValue: { dimension in
                                     dimension[.top]
@@ -70,6 +71,9 @@ struct ContentView: View {
         .onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
                 initialLoad = false
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(700)) {
+                bubbleInitialLoad = false
             }
         }
     }
@@ -201,24 +205,25 @@ struct UnoGroup: View {
 
 struct DuoGroup: View {
     public var friends: [String]
+    @Binding var onLoad: Bool
 
     var body: some View {
         ZStack(alignment: .leading) {
+            ColorBubble(color: .kinzooPink, size: 17)
+                .offset(x: self.onLoad ? 65 : 25, y: 75)
+            ColorBubble(color: .kinzooOrange, size: 7)
+                .offset(x: self.onLoad ? 55 : 10, y: 80)
+            ColorBubble(color: .kinzooYellow, size: 10)
+                .offset(x: self.onLoad ? 40 : 12, y: 45)
+            ColorBubble(color: .kinzooBlue, size: 12)
+                .offset(x: self.onLoad ? 35 : 80, y: 5)
+            ColorBubble(color: .kinzooYellow, size: 15)
+                .offset(x: self.onLoad ? 40 : 90, y: -22)
+            ColorBubble(color: .kinzooOrange, size: 10)
+                .offset(x: self.onLoad ? 40 : 110, y: 7)
             FriendBubble(friend: friends[0], size: 70, borderColor: Color.clear)
             FriendBubble(friend: friends[1], size: 70, borderColor: Color.white)
                 .offset(x:40 ,y: 50)
-            ColorBubble(color: .kinzooPink, size: 17)
-                .offset(x: 25, y: 75)
-            ColorBubble(color: .kinzooOrange, size: 7)
-                .offset(x: 10, y: 80)
-            ColorBubble(color: .kinzooYellow, size: 10)
-                .offset(x: 12, y: 45)
-            ColorBubble(color: .kinzooBlue, size: 12)
-                .offset(x: 80, y: 5)
-            ColorBubble(color: .kinzooYellow, size: 15)
-                .offset(x: 90, y: -22)
-            ColorBubble(color: .kinzooOrange, size: 10)
-                .offset(x: 110, y: 7)
             Text("\(friends[0].capitilizeFirst()) & \(friends[1].capitilizeFirst())")
                 .foregroundColor(.black)
                 .font(.system(size: 16, weight: .bold, design: .default))
@@ -233,30 +238,32 @@ struct TrioGroup: View {
     private var color: Color
     private var countColor: Color
     private var countBorderColor: Color
+    @Binding var onLoad: Bool
     
-    init(friends: [String], color: Color) {
+    init(friends: [String], color: Color, onLoad: Binding<Bool>) {
         self.friends = friends
         self.color = color
+        self._onLoad = onLoad
         countColor = color == .kinzooPurple ? color : Color.kinzooBlue
         countBorderColor = color == .kinzooPurple ? color : .white
     }
     
     var body: some View {
         ZStack(alignment: .leading) {
+            ColorBubble(color: .kinzooPink, size: 17)
+                .offset(x: self.onLoad ? 40 : 2, y: 70)
+            ColorBubble(color: .kinzooOrange, size: 7)
+                .offset(x: self.onLoad ? 40 : 5, y: 40)
+            ColorBubble(color: .kinzooBlue, size: 12)
+                .offset(x: self.onLoad ? 40 : 100, y: 63)
+            ColorBubble(color: .kinzooOrange, size: 10)
+                .offset(x: self.onLoad ? 40 : 95, y: self.onLoad ? 70 : 80)
             FriendBubble(friend: friends[0], size: 70, borderColor: color)
                 .offset(x:0, y:0)
             FriendBubble(friend: friends[1], size: 70, borderColor: color)
                .offset(x:55, y:0)
             FriendBubble(friend: friends[2], size: 70, borderColor: color)
                .offset(x:25, y:47)
-            ColorBubble(color: .kinzooPink, size: 17)
-                .offset(x: 2, y: 70)
-            ColorBubble(color: .kinzooOrange, size: 7)
-                .offset(x: 5, y: 40)
-            ColorBubble(color: .kinzooBlue, size: 12)
-                .offset(x: 100, y: 63)
-            ColorBubble(color: .kinzooOrange, size: 10)
-                .offset(x: 95, y: 80)
             CountBubble(size: 45, color: countColor, borderColor: countBorderColor, count: 3)
                 .offset(x: 80, y: 30)
             Text("\(friends[0].capitilizeFirst()), \(friends[1].capitilizeFirst()) &\n \(friends[2].capitilizeFirst())")
